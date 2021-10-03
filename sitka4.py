@@ -13,8 +13,8 @@ print(type(header_row))
 for index, column_header in enumerate(header_row):
     print(index, column_header)
 # testing to conver date from string
-mydate = datetime.strptime('2018-07-01', '%Y-%m-%d')
-print(type(mydate))
+# mydate = datetime.strptime('2018-07-01', '%Y-%m-%d')
+# print(type(mydate))
 
 highs = []
 dates = []
@@ -26,16 +26,15 @@ for row in csv_file:
         high = int(row[4])
         low = int(row[5])
     except ValueError:
-        print(f"Missingdata for {the_date}")
+        print(f"Missing data for {the_date}")
     else:
         highs.append(int(row[4]))
         lows.append(int(row[5]))
-
-    dates.append(the_date)
+        dates.append(the_date)
 
 # print(highs)
 # print(dates)
-'''
+
 fig = plt.figure()
 
 plt.title("Daily high temperatures, July 2018", fontsize=16)
@@ -66,4 +65,4 @@ plt.suptitle("Highs and lows of Sitka, Alaska")
 
 plt.show()
 
-'''
+
