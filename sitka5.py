@@ -10,7 +10,7 @@ csv_file_s = csv.reader(open_file_s, delimiter=",")
 
 header_row = next(csv_file)
 header_row_s = next(csv_file_s)
-#print(type(header_row))
+# print(type(header_row))
 
 for index, column_header in enumerate(header_row):
     print(index, column_header)
@@ -21,24 +21,25 @@ for index, column_header in enumerate(header_row):
 highs = []
 dates = []
 lows = []
+names1 = []
 highs_s = []
 dates_s = []
 lows_s = []
-
+names2 = []
 
 for row in csv_file:
     try:
         the_date = datetime.strptime(row[2], '%Y-%m-%d')
         high = int(row[4])
         low = int(row[5])
+        name1 = row[1]
     except ValueError:
         print(f"Missing data for {the_date}")
     else:
         highs.append(int(row[4]))
         lows.append(int(row[5]))
         dates.append(the_date)
-
-
+        names1.append(row[1])
 
 
 for row in csv_file_s:
@@ -46,12 +47,14 @@ for row in csv_file_s:
         the_date1 = datetime.strptime(row[2], '%Y-%m-%d')
         high1 = int(row[5])
         low1 = int(row[6])
+        name2 = row[1]
     except ValueError:
         print(f"Missing data for {the_date1}")
     else:
         highs_s.append(int(row[5]))
         lows_s.append(int(row[6]))
         dates_s.append(the_date1)
+        names2.append(row[1])
 
 # print(highs)
 # print(dates)
@@ -69,16 +72,14 @@ plt.plot(dates, lows, c="blue", alpha=0.5)
 plt.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
 
 fig.autofmt_xdate()
-
+plt.show()
 
 # plt.subplot(row,col,index)
 #open_file_s = open("sitka_weather_2018_simple.csv", "r")
 
-for row in open_file_s:
-          Name1 = row[1]
-            
+
 plt.subplot(2, 1, 1)
-plt.title(Name1)
+plt.title(names1[1])
 plt.xlabel("", fontsize=12)
 plt.ylabel("", fontsize=12)
 plt.tick_params(axis="both", which="major", labelsize=12)
@@ -91,12 +92,8 @@ plt.fill_between(dates_s, highs_s, lows_s, facecolor='blue', alpha=0.1)
 fig.autofmt_xdate()
 
 
-
-Name2 =[]
-for row in open_file_s:
-          Name2.append
 plt.subplot(2, 1, 2)
-plt.title(Name2)
+plt.title(names2[1])
 plt.xlabel("", fontsize=12)
 plt.ylabel("", fontsize=12)
 plt.tick_params(axis="both", which="major", labelsize=12)
@@ -109,10 +106,7 @@ plt.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
 fig.autofmt_xdate()
 
 
-
-
-plt.suptitle("Temperature comparison between SITKA AIRPORT, AK US and DEATH VALLEY, CA US")
+plt.suptitle(
+    "Temperature comparison between SITKA AIRPORT, AK US and DEATH VALLEY, CA US")
 
 plt.show()
-
-
